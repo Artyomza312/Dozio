@@ -28,30 +28,31 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 CANCEL_BTN = KeyboardButton(text="❌ کنسل")
-
-# --- منوها
 def admin_menu():
     kb = [
-        [KeyboardButton("➕ افزودن مدیر میانی"), KeyboardButton("➕ تعریف تسک")],
-        [KeyboardButton("📥 مشاهده گزارش‌ها"), KeyboardButton("🗂 مشاهده تسک‌های فعال")],
-        [KeyboardButton("👥 لیست کاربران")]
+        [KeyboardButton(text="➕ افزودن مدیر میانی"), KeyboardButton(text="➕ تعریف تسک")],
+        [KeyboardButton(text="📥 مشاهده گزارش‌ها"), KeyboardButton(text="🗂 مشاهده تسک‌های فعال")],
+        [KeyboardButton(text="👥 لیست کاربران")]
     ]
     return ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
 
 def manager_menu():
     kb = [
-        [KeyboardButton("➕ افزودن کاربر"), KeyboardButton("➕ تعریف تسک")],
-        [KeyboardButton("📝 ثبت گزارش برای مدیر"), KeyboardButton("📥 مشاهده گزارش‌ها")],
-        [KeyboardButton("🗂 مشاهده تسک‌های فعال"), KeyboardButton("👥 لیست اعضای تیم")]
+        [KeyboardButton(text="➕ افزودن کاربر"), KeyboardButton(text="➕ تعریف تسک")],
+        [KeyboardButton(text="📝 ثبت گزارش برای مدیر"), KeyboardButton(text="📥 مشاهده گزارش‌ها")],
+        [KeyboardButton(text="🗂 مشاهده تسک‌های فعال"), KeyboardButton(text="👥 لیست اعضای تیم")]
     ]
     return ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
 
 def member_menu():
     kb = [
-        [KeyboardButton("🗂 مشاهده تسک‌های فعال"), KeyboardButton("📝 ارسال گزارش")],
-        [KeyboardButton("📥 مشاهده گزارش‌های من")]
+        [KeyboardButton(text="🗂 مشاهده تسک‌های فعال"), KeyboardButton(text="📝 ارسال گزارش")],
+        [KeyboardButton(text="📥 مشاهده گزارش‌های من")]
     ]
     return ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
+
+def cancel_menu():
+    return ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text="❌ کنسل")]], resize_keyboard=True)
 
 def cancel_menu():
     return ReplyKeyboardMarkup(keyboard=[[CANCEL_BTN]], resize_keyboard=True)

@@ -1,0 +1,31 @@
+# Database files
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Logs
+*.log
+
+# Editor config files
+.vscode/
+.idea/
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
+
+# Swap files
+*.swp
+
+# Sensitive settings
+config.py
