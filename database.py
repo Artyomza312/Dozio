@@ -70,18 +70,23 @@ def get_user_by_username(username):
 def create_user(telegram_id, username, name, role='member', supervisor_id=None):
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute('''
-        INSERT OR IGNORE INTO users (telegram_id, username, name, role, supervisor_id)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (telegram_id, username, name, role, supervisor_id))
-    # اگر کاربر فقط با username ثبت شده بود و حالا با telegram_id اومده، آپدیت کن
-    if telegram_id:
+    # اگر قبلاً وجود داشته، فقط آپدیت کن
+    c.execute('SELECT id FROM users WHERE telegram_id=? OR (username=? AND username IS NOT NULL)', (telegram_id, username))
+    user = c.fetchone()
+    if user:
         c.execute('''
-            UPDATE users SET telegram_id = ?, name = ?, role = ?, supervisor_id = ?
-            WHERE username = ? OR telegram_id = ?
-        ''', (telegram_id, name, role, supervisor_id, username, telegram_id))
+            UPDATE users
+            SET username=?, name=?, role=?, supervisor_id=?
+            WHERE telegram_id=? OR (username=? AND username IS NOT NULL)
+        ''', (username, name, role, supervisor_id, telegram_id, username))
+    else:
+        c.execute('''
+            INSERT INTO users (telegram_id, username, name, role, supervisor_id)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (telegram_id, username, name, role, supervisor_id))
     conn.commit()
     conn.close()
+
 
 def delete_user_by_telegram_id(telegram_id):
     conn = sqlite3.connect(DB_NAME)
